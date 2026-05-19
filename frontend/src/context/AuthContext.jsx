@@ -20,23 +20,34 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Register a new user
-  const register = async (name, email, password) => {
-    const { data } = await API.post("/auth/register", { name, email, password });
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data));
-    setUser(data);
-    return data;
-  };
+ // Register a new user
+const register = async (name, email, password) => {
+  const { data } = await API.post("/api/auth/register", {
+    name,
+    email,
+    password,
+  });
 
-  // Login existing user
-  const login = async (email, password) => {
-    const { data } = await API.post("/auth/login", { email, password });
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data));
-    setUser(data);
-    return data;
-  };
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("user", JSON.stringify(data));
+  setUser(data);
+
+  return data;
+};
+
+// Login existing user
+const login = async (email, password) => {
+  const { data } = await API.post("/api/auth/login", {
+    email,
+    password,
+  });
+
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("user", JSON.stringify(data));
+  setUser(data);
+
+  return data;
+};
 
   // Logout
   const logout = () => {
