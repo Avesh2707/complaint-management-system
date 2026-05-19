@@ -24,6 +24,9 @@ app.use(cors({
   ],
   credentials: true,
 }));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // ─── Health Check Route ───────────────────────────────────────
 app.get("/", (req, res) => {
   res.json({
